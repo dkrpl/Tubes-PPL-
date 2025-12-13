@@ -1,1018 +1,501 @@
-/* Reset & Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --accent-color: #e74c3c;
-    --gold-color: #d4af37;
-    --paper-color: #f8f5e9;
-    --paper-dark: #e8e5d9;
-    --text-color: #2c3e50;
-    --text-light: #7f8c8d;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-}
-
-[data-theme="dark"] {
-    --primary-color: #34495e;
-    --paper-color: #2c3e50;
-    --paper-dark: #1a252f;
-    --text-color: #ecf0f1;
-    --text-light: #bdc3c7;
-}
-
-[data-theme="sepia"] {
-    --paper-color: #f4ecd8;
-    --paper-dark: #e4dcc9;
-    --text-color: #5d4037;
-    --text-light: #8d6e63;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    color: var(--text-color);
-    transition: var(--transition);
-}
-
-/* Navbar */
-.navbar {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: var(--shadow);
-}
-
-.nav-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.logo-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.8rem;
-    font-weight: bold;
-    box-shadow: var(--shadow);
-}
-
-.logo-text h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.logo-text p {
-    font-size: 0.9rem;
-    color: var(--text-light);
-}
-
-.nav-menu {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.nav-btn {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    background: transparent;
-    color: var(--text-color);
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: var(--transition);
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.nav-btn:hover {
-    background: rgba(var(--secondary-color), 0.1);
-    transform: translateY(-2px);
-}
-
-/* Settings Panel */
-.settings-panel {
-    position: fixed;
-    right: -300px;
-    top: 0;
-    width: 300px;
-    height: 100vh;
-    background: var(--paper-color);
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
-    transition: right 0.3s ease;
-    padding: 2rem;
-}
-
-.settings-panel.active {
-    right: 0;
-}
-
-.settings-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--gold-color);
-}
-
-.settings-header h3 {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.close-btn:hover {
-    color: var(--accent-color);
-    transform: rotate(90deg);
-}
-
-.setting-item {
-    margin-bottom: 1.5rem;
-}
-
-.setting-item label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-    font-weight: 500;
-}
-
-.setting-item input[type="range"],
-.setting-item select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: white;
-    color: var(--text-color);
-}
-
-/* Main Content */
-.main-content {
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.page-content {
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* Home Page */
-.page-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.page-header h2 {
-    font-size: 2.5rem;
-    color: white;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.search-container {
-    position: relative;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.search-container input {
-    width: 100%;
-    padding: 1rem 3rem 1rem 1.5rem;
-    border: none;
-    border-radius: 50px;
-    background: rgba(255, 255, 255, 0.9);
-    font-size: 1rem;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-}
-
-.search-container input:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(var(--secondary-color), 0.3);
-}
-
-.search-container i {
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-light);
-}
-
-.search-results {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    margin-top: 0.5rem;
-    max-height: 400px;
-    overflow-y: auto;
-    z-index: 100;
-    display: none;
-}
-
-.search-results.active {
-    display: block;
-}
-
-.search-result-item {
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.search-result-item:hover {
-    background: #f8f9fa;
-}
-
-.search-result-item:last-child {
-    border-bottom: none;
-}
-
-/* Surah Grid */
-.surah-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem 0;
-}
-
-.surah-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 1.5rem;
-    cursor: pointer;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.surah-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    border-color: var(--gold-color);
-}
-
-.surah-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.surah-card:hover::before {
-    left: 100%;
-}
-
-.surah-number {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-.bookmark-btn {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: var(--gold-color);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.bookmark-btn:hover {
-    transform: scale(1.2);
-}
-
-.surah-name {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.surah-arabic {
-    font-family: 'Amiri', serif;
-    font-size: 1.8rem;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-    text-align: right;
-    direction: rtl;
-}
-
-.surah-details {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-/* 3D Book Styles */
-.book-container {
-    perspective: 2000px;
-    margin: 2rem auto;
-    position: relative;
-    height: 600px;
-}
-
-.book {
-    position: relative;
-    width: 900px;
-    height: 100%;
-    margin: 0 auto;
-    transform-style: preserve-3d;
-    transform: rotateY(-15deg);
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.book.open {
-    transform: rotateY(-30deg);
-}
-
-.book-spine {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%) rotateY(90deg);
-    width: 40px;
-    height: 100%;
-    background: linear-gradient(to right, #2c3e50, #34495e);
-    transform-origin: center;
-}
-
-.pages {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-}
-
-.page {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    background: var(--paper-color);
-    transform-origin: left center;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-.left-page {
-    left: 0;
-    border-radius: 5px 0 0 5px;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.right-page {
-    right: 0;
-    border-radius: 0 5px 5px 0;
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.page-content {
-    height: 100%;
-    padding: 2rem;
-    overflow-y: auto;
-    position: relative;
-}
-
-.page-content::-webkit-scrollbar {
-    width: 6px;
-}
-
-.page-content::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.page-content::-webkit-scrollbar-thumb {
-    background: var(--gold-color);
-    border-radius: 3px;
-}
-
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(var(--gold-color), 0.3);
-}
-
-.surah-name {
-    font-weight: 600;
-    color: var(--primary-color);
-    font-size: 1.1rem;
-}
-
-.page-number {
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-.verses-container {
-    direction: rtl;
-}
-
-.verse {
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px dashed rgba(var(--gold-color), 0.2);
-}
-
-.verse:last-child {
-    border-bottom: none;
-}
-
-.verse-number {
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    background: var(--gold-color);
-    color: white;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 28px;
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.arabic-text {
-    font-family: 'Amiri', serif;
-    font-size: var(--arabic-size, 2rem);
-    line-height: 2.5;
-    text-align: right;
-    margin-bottom: 1rem;
-}
-
-.translation {
-    font-size: 0.95rem;
-    color: var(--text-color);
-    line-height: 1.6;
-    margin-top: 1rem;
-    padding-left: 1rem;
-    border-left: 3px solid rgba(var(--secondary-color), 0.3);
-}
-
-.transliteration {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    font-style: italic;
-    margin: 0.5rem 0;
-}
-
-.verse-controls {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.verse-btn {
-    width: 36px;
-    height: 36px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(var(--secondary-color), 0.1);
-    color: var(--secondary-color);
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.verse-btn:hover {
-    background: rgba(var(--secondary-color), 0.2);
-    transform: scale(1.1);
-}
-
-.page-footer {
-    position: absolute;
-    bottom: 1rem;
-    left: 0;
-    right: 0;
-    padding: 0 2rem;
-}
-
-.bismillah {
-    font-family: 'Amiri', serif;
-    font-size: 1.5rem;
-    text-align: center;
-    color: var(--gold-color);
-    padding: 1rem 0;
-    border-top: 1px solid rgba(var(--gold-color), 0.3);
-}
-
-.page-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.book-cover {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #1a237e, #283593);
-    border-radius: 10px;
-    transform: rotateY(180deg);
-    backface-visibility: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 10px solid var(--gold-color);
-}
-
-.cover-design {
-    text-align: center;
-    padding: 2rem;
-}
-
-.arabic-title {
-    font-family: 'Amiri', serif;
-    font-size: 3rem;
-    color: white;
-    margin-bottom: 1rem;
-}
-
-.gold-line {
-    width: 200px;
-    height: 3px;
-    background: var(--gold-color);
-    margin: 1rem auto;
-}
-
-.subtitle {
-    color: white;
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-}
-
-/* Pagination */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin: 2rem auto;
-    max-width: 800px;
-}
-
-.page-nav-btn {
-    padding: 0.8rem 1.5rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    border-radius: 8px;
-    color: var(--primary-color);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: var(--transition);
-    font-weight: 500;
-    box-shadow: var(--shadow);
-}
-
-.page-nav-btn:hover:not(:disabled) {
-    background: white;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-.page-nav-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.page-indicator {
-    padding: 0.5rem 1.5rem;
-    background: white;
-    border-radius: 8px;
-    font-weight: 500;
-    box-shadow: var(--shadow);
-}
-
-/* Quick Navigation */
-.quick-nav {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin: 2rem auto;
-    max-width: 800px;
-    box-shadow: var(--shadow);
-}
-
-#pageSlider {
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(to right, var(--secondary-color), var(--gold-color));
-    border-radius: 3px;
-    outline: none;
-    margin-bottom: 1rem;
-}
-
-#pageSlider::-webkit-slider-thumb {
-    width: 20px;
-    height: 20px;
-    background: var(--gold-color);
-    border-radius: 50%;
-    cursor: pointer;
-    appearance: none;
-}
-
-.page-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-}
-
-.page-btn {
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: rgba(var(--secondary-color), 0.1);
-    border-radius: 6px;
-    color: var(--text-color);
-    cursor: pointer;
-    transition: var(--transition);
-    font-weight: 500;
-}
-
-.page-btn:hover {
-    background: rgba(var(--secondary-color), 0.2);
-    transform: translateY(-2px);
-}
-
-.page-btn.active {
-    background: var(--gold-color);
-    color: white;
-}
-
-/* Reader Header */
-.reader-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow);
-}
-
-.back-btn {
-    padding: 0.8rem 1.5rem;
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: var(--transition);
-    font-weight: 500;
-}
-
-.back-btn:hover {
-    transform: translateX(-5px);
-    box-shadow: 0 5px 15px rgba(var(--secondary-color), 0.3);
-}
-
-.surah-info {
-    text-align: center;
-}
-
-.surah-info h2 {
-    font-size: 1.8rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.surah-info p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-.audio-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.audio-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    border: none;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-}
-
-.audio-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(var(--secondary-color), 0.4);
-}
-
-/* Bookmarks Page */
-.bookmarks-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1.5rem;
-}
-
-.bookmark-item {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    position: relative;
-}
-
-.bookmark-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.remove-bookmark {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    color: var(--accent-color);
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: var(--transition);
-}
-
-.remove-bookmark:hover {
-    transform: scale(1.2);
-}
-
-.bookmark-content .arabic-text {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.bookmark-meta {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text-light);
-    font-size: 0.9rem;
-    margin-top: 1rem;
-}
-
-.clear-btn {
-    padding: 0.8rem 1.5rem;
-    background: rgba(231, 76, 60, 0.1);
-    border: 1px solid var(--accent-color);
-    border-radius: 8px;
-    color: var(--accent-color);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: var(--transition);
-    font-weight: 500;
-}
-
-.clear-btn:hover {
-    background: var(--accent-color);
-    color: white;
-}
-
-/* Floating Controls */
-.floating-controls {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    z-index: 1000;
-}
-
-.floating-btn {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: none;
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: var(--transition);
-}
-
-.floating-btn:hover {
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-/* Loading States */
-.loading-state {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 3rem;
-    grid-column: 1 / -1;
-}
-
-.loader {
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba(var(--secondary-color), 0.1);
-    border-top-color: var(--secondary-color);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 1rem;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .book-container {
-        height: 500px;
-    }
-    
-    .book {
-        width: 750px;
-    }
-    
-    .arabic-text {
-        font-size: 1.8rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-content {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-    }
-    
-    .nav-menu {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .book-container {
-        height: 400px;
-        transform: scale(0.8);
-        transform-origin: top center;
-    }
-    
-    .book {
-        width: 100%;
-    }
-    
-    .page-content {
-        padding: 1rem;
-    }
-    
-    .arabic-text {
-        font-size: 1.6rem;
-    }
-    
-    .surah-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .reader-header {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-    
-    .pagination {
-        flex-wrap: wrap;
-    }
-}
-
-@media (max-width: 480px) {
-    .book-container {
-        height: 300px;
-        transform: scale(0.7);
-    }
-    
-    .arabic-text {
-        font-size: 1.4rem;
-    }
-    
-    .page-nav-btn span {
-        display: none;
-    }
-    
-    .page-nav-btn {
-        padding: 0.8rem;
-    }
-}
-
-/* Print Styles */
-@media print {
-    .navbar,
-    .floating-controls,
-    .pagination,
-    .quick-nav {
-        display: none !important;
-    }
-    
-    .book {
-        transform: none !important;
-        box-shadow: none !important;
-    }
-    
-    .page {
-        break-inside: avoid;
-        box-shadow: none !important;
-        border: 1px solid #ddd !important;
-    }
-}
+
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --primary-light: #a5b4fc;
+            --primary-dark: #4c6ef5;
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --gold: #f59e0b;
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-border: #e2e8f0;
+            --light-text: #334155;
+            --light-text-secondary: #64748b;
+            --dark-bg: #0f172a;
+            --dark-surface: #1e293b;
+            --dark-border: #334155;
+            --dark-text: #f1f5f9;
+            --dark-text-secondary: #94a3b8;
+        }
+
+        [data-theme="light"] {
+            --bg-color: var(--light-bg);
+            --surface-color: var(--light-surface);
+            --border-color: var(--light-border);
+            --text-color: var(--light-text);
+            --text-secondary: var(--light-text-secondary);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: var(--dark-bg);
+            --surface-color: var(--dark-surface);
+            --border-color: var(--dark-border);
+            --text-color: var(--dark-text);
+            --text-secondary: var(--dark-text-secondary);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            line-height: 3;
+            text-align: right;
+            direction: rtl;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* Modern Components */
+        .card {
+            background: var(--surface-color);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--primary-light);
+        }
+
+        .card-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--surface-color);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        /* Audio Player - Redesigned */
+        .audio-player-container {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 16px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .audio-player-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .audio-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .audio-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .audio-btn:active {
+            transform: scale(0.95);
+        }
+
+        .audio-btn-secondary {
+            background: var(--surface-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            box-shadow: none;
+        }
+
+        .audio-btn-secondary:hover {
+            background: var(--bg-color);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .audio-progress {
+            flex: 1;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .audio-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .audio-time {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Surah Card */
+        .surah-card {
+            padding: 20px;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .surah-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .surah-name-arabic {
+            font-size: 1.5rem;
+            margin: 12px 0;
+            font-weight: 600;
+        }
+
+        .surah-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .surah-type {
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: var(--bg-color);
+            color: var(--text-secondary);
+        }
+
+        /* Verse Display */
+        .verse-container {
+            padding: 24px;
+            margin: 16px 0;
+        }
+
+        .verse-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .verse-number {
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .verse-arabic {
+            margin: 20px 0;
+            padding: 20px;
+            background: var(--bg-color);
+            border-radius: 12px;
+            border-right: 4px solid var(--primary);
+        }
+
+        .verse-translation {
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--surface-color);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .verse-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--surface-color);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .page-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 48px 16px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--surface-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: var(--surface-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Bookmark */
+        .bookmark-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--surface-color);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .bookmark-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .bookmark-btn.active {
+            background: var(--gold);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: var(--hover-shadow);
+            transform: translateX(120%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border-color);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .stat-card {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
