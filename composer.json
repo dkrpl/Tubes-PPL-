@@ -1,5 +1,15 @@
 {
     "require-dev": {
         "phpunit/phpunit": "^11.5"
+    },
+     "scripts": {
+        "test": "phpunit tests/FileTypeTest.php --testdox --colors=always",
+        "test-ci": "phpunit tests/FileTypeTest.php --stop-on-failure",
+        "validate": "phpunit tests/FileTypeTest.php --testdox"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     }
 }

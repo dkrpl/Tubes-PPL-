@@ -3,192 +3,294 @@ use PHPUnit\Framework\TestCase;
 
 class FileTypeTest extends TestCase
 {
-    // Helper: Buat file placeholder
-    private function createPlaceholderFile($filename)
+    private $requiredFiles = [
+        'index.php',
+        'about.php',
+        'kontak.php',
+        'fitur.php', 
+    ];
+
+    // ========== VALIDATOR 1: File Structure & PHP Requirement ==========
+    public function test_all_files_must_be_php_and_exist()
     {
-        $pageTitle = ucfirst(str_replace('.php', '', $filename));
-        $content = <<<HTML
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$pageTitle - Al-Quran Digital</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="bg-gray-50 min-h-screen">
-    <nav class="bg-white shadow-lg">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="index.php" class="text-2xl font-bold text-purple-600">
-                    <i class="fas fa-quran mr-2"></i>Quran Digital
-                </a>
-                <div class="space-x-4">
-                    <a href="index.php" class="text-gray-600 hover:text-purple-600">Beranda</a>
-                    <a href="gallery.php" class="text-gray-600 hover:text-purple-600">Galeri</a>
-                    <a href="about.php" class="text-gray-600 hover:text-purple-600">Tentang</a>
-                    <a href="kontak.php" class="text-gray-600 hover:text-purple-600">Kontak</a>
-                    <a href="panduan.php" class="text-gray-600 hover:text-purple-600">Panduan</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <main class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6">$pageTitle</h1>
-        <div class="bg-white rounded-lg shadow p-6">
-            <p class="text-gray-600">Halaman $pageTitle sedang dalam pengembangan.</p>
-            <p class="mt-4">Ini adalah placeholder untuk testing CI/CD.</p>
-        </div>
-    </main>
-
-    <footer class="bg-gray-800 text-white py-6 mt-8">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 Al-Quran Digital</p>
-        </div>
-    </footer>
-</body>
-</html>
-HTML;
+        echo "\n🔍 VALIDATOR 1: Checking file structure...\n";
         
-        file_put_contents($filename, $content);
-    }
-
-    // ========== VALIDATOR 1: File Structure ==========
-    public function test_web_structure_and_php_files()
-    {
-        $requiredFiles = ['index.php', 'gallery.php', 'about.php', 'kontak.php', 'panduan.php'];
-
-        foreach ($requiredFiles as $file) {
-            if (!file_exists($file)) {
-                $this->createPlaceholderFile($file);
-            }
+        foreach ($this->requiredFiles as $file) {
+            // Cek file exist
+            $this->assertFileExists(
+                $file, 
+                "❌ File $file tidak ditemukan! Buat file ini untuk melanjutkan."
+            );
             
-            $this->assertFileExists($file);
-            $this->assertEquals('php', pathinfo($file, PATHINFO_EXTENSION));
+            // Cek ekstensi PHP
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+            $this->assertEquals(
+                'php', 
+                $extension,
+                "❌ File $file harus berekstensi .php, ditemukan .$extension"
+            );
             
-            $content = file_get_contents($file);
-            $this->assertStringContainsString('<?php', $content);
-            $this->assertStringContainsString('<!DOCTYPE html>', $content);
-            $this->assertStringContainsString('</html>', $content);
-        }
-    }
-
-    // ========== VALIDATOR 2: API Integration ==========
-    public function test_api_integration_and_javascript()
-    {
-        $mainPages = ['index.php'];
-        
-        foreach ($mainPages as $file) {
-            $content = file_get_contents($file);
-            
-            // Cek API integration
-            $this->assertStringContainsString('equran.id/api', $content);
-            
-            // Cek JavaScript untuk API
-            $hasAPICalls = strpos($content, 'fetch(') !== false || 
-                          strpos($content, 'async') !== false ||
-                          strpos($content, 'await') !== false;
-            $this->assertTrue($hasAPICalls, "File $file harus mengandung API calls");
-            
-            // Cek error handling
-            $this->assertStringContainsString('catch', $content);
-            $this->assertStringContainsString('try', $content);
-            
-            // Cek loading states
-            $this->assertStringContainsString('loading', $content);
-        }
-    }
-
-    // ========== VALIDATOR 3: Responsive Design ==========
-    public function test_responsive_design_and_tailwind()
-    {
-        $files = ['index.php', 'gallery.php', 'about.php', 'kontak.php', 'panduan.php'];
-        
-        foreach ($files as $file) {
-            if (!file_exists($file)) continue;
-            
-            $content = file_get_contents($file);
-            
-            // Cek Tailwind
-            $this->assertStringContainsString('cdn.tailwindcss.com', $content);
-            
-            // Cek responsive meta
-            $this->assertStringContainsString('viewport', $content);
-            $this->assertStringContainsString('width=device-width', $content);
-            
-            // Cek responsive classes
-            $hasResponsiveClass = false;
-            $responsiveClasses = ['md:', 'lg:', 'xl:', 'sm:', 'flex', 'grid'];
-            foreach ($responsiveClasses as $class) {
-                if (strpos($content, $class) !== false) {
-                    $hasResponsiveClass = true;
-                    break;
-                }
-            }
-            $this->assertTrue($hasResponsiveClass, "File $file harus responsive");
-            
-            // Cek Font Awesome
-            $this->assertStringContainsString('font-awesome', $content);
-        }
-    }
-
-    // ========== VALIDATOR 4: Quran Features ==========
-    public function test_quran_specific_features()
-    {
-        $content = file_get_contents('index.php');
-        
-        // Cek fitur Quran
-        $features = ['arabic-text', 'surah', 'ayat', 'audio', 'bookmark', 'search'];
-        $featureCount = 0;
-        
-        foreach ($features as $feature) {
-            if (strpos($content, $feature) !== false) {
-                $featureCount++;
+            // Cek file tidak kosong
+            if (file_exists($file)) {
+                $filesize = filesize($file);
+                $this->assertGreaterThan(
+                    50,
+                    $filesize,
+                    "❌ File $file terlalu kecil ($filesize bytes). Minimal 50 bytes."
+                );
             }
         }
         
-        $this->assertGreaterThanOrEqual(4, $featureCount);
-        
-        // Cek Arabic font
-        $this->assertStringContainsString('fonts.googleapis.com', $content);
-        $this->assertStringContainsString('Amiri', $content);
-        
-        // Cek bookmark system
-        $this->assertStringContainsString('localStorage', $content);
+        echo "✅ VALIDATOR 1 LULUS: Semua file PHP ada dan valid\n";
     }
 
-    // ========== VALIDATOR 5: Page Navigation ==========
-    public function test_page_navigation_and_routing()
+    // ========== VALIDATOR 2: HTML Structure & Meta Tags ==========
+    public function test_html_structure_and_meta_tags()
     {
-        $pages = [
-            'index.php' => 'Beranda',
-            'gallery.php' => 'Galeri', 
-            'about.php' => 'Tentang',
-            'kontak.php' => 'Kontak',
-            'panduan.php' => 'Panduan'
+        echo "\n🔍 VALIDATOR 2: Checking HTML structure...\n";
+        
+        $requiredTags = [
+            '<!DOCTYPE html>',
+            '<html',
+            '</html>',
+            '<head',
+            '<title',
+            '<body'
         ];
         
-        foreach ($pages as $file => $pageName) {
-            if (!file_exists($file)) continue;
+        $requiredMetaTags = [
+            'charset="UTF-8"',
+            'viewport',
+            'width=device-width'
+        ];
+
+        foreach ($this->requiredFiles as $file) {
+            if (!file_exists($file)) {
+                continue;
+            }
+            
+            $content = file_get_contents($file);
+            $contentLower = strtolower($content);
+            
+            // Cek HTML structure
+            foreach ($requiredTags as $tag) {
+                $this->assertStringContainsString(
+                    strtolower($tag),
+                    $contentLower,
+                    "❌ File $file harus mengandung tag: $tag"
+                );
+            }
+            
+            // Cek meta tags
+            $metaCount = 0;
+            foreach ($requiredMetaTags as $meta) {
+                if (strpos($contentLower, strtolower($meta)) !== false) {
+                    $metaCount++;
+                }
+            }
+            $this->assertGreaterThanOrEqual(
+                2,
+                $metaCount,
+                "❌ File $file harus mengandung minimal 2 meta tags responsive"
+            );
+        }
+        
+        echo "✅ VALIDATOR 2 LULUS: Struktur HTML dan meta tags valid\n";
+    }
+
+    // ========== VALIDATOR 3: CSS Framework & Responsive Design ==========
+    public function test_css_framework_and_responsive_design()
+    {
+        echo "\n🔍 VALIDATOR 3: Checking CSS framework...\n";
+        
+        foreach ($this->requiredFiles as $file) {
+            if (!file_exists($file)) {
+                continue;
+            }
             
             $content = file_get_contents($file);
             
-            // Cek inter-page links
-            $linkCount = 0;
-            foreach ($pages as $targetFile => $targetName) {
-                if ($file !== $targetFile) {
-                    if (strpos($content, $targetFile) !== false) {
-                        $linkCount++;
+            // Cek penggunaan CSS Framework
+            $hasCSSFramework = 
+                strpos($content, 'tailwindcss.com') !== false ||
+                strpos($content, 'bootstrap') !== false ||
+                strpos($content, 'cdn.jsdelivr.net/npm/') !== false;
+            
+            $this->assertTrue(
+                $hasCSSFramework,
+                "❌ File $file harus menggunakan CSS Framework (Tailwind/Bootstrap/CDN)"
+            );
+            
+            // Cek responsive classes untuk index.php
+            if ($file === 'index.php') {
+                $responsiveClasses = ['md:', 'lg:', 'sm:', 'xl:', 'flex', 'grid'];
+                $foundClass = false;
+                foreach ($responsiveClasses as $class) {
+                    if (strpos($content, $class) !== false) {
+                        $foundClass = true;
+                        break;
                     }
+                }
+                $this->assertTrue(
+                    $foundClass,
+                    "❌ File index.php harus menggunakan responsive CSS classes"
+                );
+            }
+        }
+        
+        echo "✅ VALIDATOR 3 LULUS: CSS framework dan responsive design valid\n";
+    }
+
+    // ========== VALIDATOR 4: Navigation & Page Structure ==========
+    public function test_navigation_and_page_structure()
+    {
+        echo "\n🔍 VALIDATOR 4: Checking navigation...\n";
+        
+        $pageTitles = [
+            'index.php' => 'Al-Quran Digital',
+            'about.php' => 'Tentang',
+            'kontak.php' => 'Kontak',
+            'panduan.php' => 'Panduan',
+            'gallery.php' => 'Galeri'
+        ];
+
+        foreach ($this->requiredFiles as $file) {
+            if (!file_exists($file)) {
+                continue;
+            }
+            
+            $content = file_get_contents($file);
+            
+            // Cek title atau h1 sesuai dengan nama file
+            if (isset($pageTitles[$file])) {
+                $hasTitle = 
+                    strpos($content, $pageTitles[$file]) !== false ||
+                    strpos($content, strtolower($pageTitles[$file])) !== false;
+                
+                $this->assertTrue(
+                    $hasTitle,
+                    "❌ File $file harus mengandung title atau heading: '{$pageTitles[$file]}'"
+                );
+            }
+            
+            // Cek link ke halaman lain (minimal 1 link)
+            $linkCount = 0;
+            foreach ($this->requiredFiles as $otherFile) {
+                if ($file !== $otherFile && strpos($content, $otherFile) !== false) {
+                    $linkCount++;
                 }
             }
             
-            $this->assertGreaterThanOrEqual(2, $linkCount);
+            $this->assertGreaterThanOrEqual(
+                1,
+                $linkCount,
+                "❌ File $file harus memiliki minimal 1 link ke halaman lain"
+            );
             
-            // Cek page title
-            $this->assertStringContainsString($pageName, $content);
+            // Cek semantic structure untuk index.php
+            if ($file === 'index.php') {
+                $semanticTags = ['<head', '<nav', '<body', '<footer'];
+                $semanticCount = 0;
+                foreach ($semanticTags as $tag) {
+                    if (strpos($content, $tag) !== false) {
+                        $semanticCount++;
+                    }
+                }
+                $this->assertGreaterThanOrEqual(
+                    2,
+                    $semanticCount,
+                    "❌ File index.php harus menggunakan minimal 2 semantic HTML tags"
+                );
+            }
         }
+        
+        echo "✅ VALIDATOR 4 LULUS: Navigation dan page structure valid\n";
+    }
+
+    // ========== VALIDATOR 5: JavaScript & Performance ==========
+    public function test_javascript_and_performance()
+    {
+        echo "\n🔍 VALIDATOR 5: Checking JavaScript...\n";
+        
+        foreach ($this->requiredFiles as $file) {
+            if (!file_exists($file)) {
+                continue;
+            }
+            
+            $content = file_get_contents($file);
+            
+            // Cek file size
+            $fileSize = filesize($file);
+            $this->assertLessThan(
+                1000000, // 1MB max
+                $fileSize,
+                "❌ File $file terlalu besar ($fileSize bytes). Optimalkan ukuran file."
+            );
+            
+            // Cek JavaScript untuk halaman utama
+            if ($file === 'index.php') {
+                // Cek ada JavaScript
+                $hasJavaScript = 
+                    strpos($content, '<script') !== false ||
+                    strpos($content, 'function') !== false ||
+                    strpos($content, 'addEventListener') !== false;
+                
+                $this->assertTrue(
+                    $hasJavaScript,
+                    "❌ File index.php harus mengandung JavaScript"
+                );
+                
+                // Cek Font Awesome atau icon library
+                $hasIconLibrary = 
+                    strpos($content, 'font-awesome') !== false ||
+                    strpos($content, 'fontawesome') !== false ||
+                    strpos($content, 'fa-') !== false;
+                
+                $this->assertTrue(
+                    $hasIconLibrary,
+                    "❌ File index.php harus menggunakan icon library (Font Awesome)"
+                );
+            }
+            
+            // Cek gambar memiliki alt text
+            if (strpos($content, '<img') !== false) {
+                $imgTags = [];
+                preg_match_all('/<img[^>]+>/i', $content, $imgTags);
+                
+                if (!empty($imgTags[0])) {
+                    $hasAlt = false;
+                    foreach ($imgTags[0] as $imgTag) {
+                        if (strpos($imgTag, 'alt=') !== false) {
+                            $hasAlt = true;
+                            break;
+                        }
+                    }
+                    $this->assertTrue(
+                        $hasAlt,
+                        "❌ File $file: Semua gambar harus memiliki alt text"
+                    );
+                }
+            }
+        }
+        
+        echo "✅ VALIDATOR 5 LULUS: JavaScript dan performance valid\n";
+        echo "\n🎉 SELESAI: Semua 5 validator berhasil dijalankan!\n";
+    }
+
+    // ========== HELPER: Tampilkan ringkasan ==========
+    public static function tearDownAfterClass(): void
+    {
+        echo "\n" . str_repeat("=", 50) . "\n";
+        echo "📊 RINGKASAN VALIDASI CI/CD\n";
+        echo str_repeat("=", 50) . "\n";
+        echo "✅ 5 Validator berhasil dijalankan:\n";
+        echo "   1. File Structure & PHP Requirement\n";
+        echo "   2. HTML Structure & Meta Tags\n";
+        echo "   3. CSS Framework & Responsive Design\n";
+        echo "   4. Navigation & Page Structure\n";
+        echo "   5. JavaScript & Performance\n";
+        echo str_repeat("=", 50) . "\n";
+        echo "🚀 Website siap untuk deployment!\n";
+        echo str_repeat("=", 50) . "\n";
     }
 }

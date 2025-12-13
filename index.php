@@ -529,6 +529,15 @@
                         <i class="fas fa-home"></i>
                         <span class="hidden md:inline">Beranda</span>
                     </button>
+                    <a href="about.php" class="btn btn-outline relative">
+                        <span class="hidden md:inline">About</span>
+                    </a>
+                    <a href="contact.php" class="btn btn-outline relative">
+                        <span class="hidden md:inline">Contact</span>
+                    </a>
+                    <a href="fitur.php" class="btn btn-outline relative">
+                        <span class="hidden md:inline">Fitur</span>
+                    </a>
                     <button onclick="showBookmarks()" class="btn btn-outline relative">
                         <i class="fas fa-bookmark"></i>
                         <span class="hidden md:inline">Bookmark</span>
@@ -537,6 +546,7 @@
                     <button onclick="toggleTheme()" class="btn btn-outline">
                         <i class="fas fa-moon"></i>
                     </button>
+                    
                 </div>
             </div>
         </div>
@@ -549,7 +559,7 @@
             <!-- Header -->
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                    Al-Quran Digital
+                    <? echo "Quran Digital" ?>
                 </h2>
                 <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
                     Baca dan tadabburi Al-Quran dengan pengalaman yang modern dan nyaman
