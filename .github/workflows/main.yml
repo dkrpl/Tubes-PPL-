@@ -73,7 +73,7 @@ jobs:
         done
         
     - name: Run Quran Website Tests
-      run: ./vendor/bin/phpunit tests/QuranWebsiteTest.php --testdox --colors=always
+      run: ./vendor/bin/phpunit tests/FileTypeTest.php --testdox --colors=always
       
     - name: Syntax Check
       run: |
