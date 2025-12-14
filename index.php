@@ -42,6 +42,12 @@
                         <span class="hidden md:inline">Bookmark</span>
                         <span id="bookmarkCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
                     </button>
+                    <button onclick="showBookmarks()" class="btn btn-outline relative">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="hidden md:inline">About</span>
+                        <span id="bookmarkCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        <a href="about.php"></a>
+                    </button>
                     <button onclick="toggleTheme()" class="btn btn-outline">
                         <i class="fas fa-moon"></i>
                     </button>
