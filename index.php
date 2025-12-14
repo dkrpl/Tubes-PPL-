@@ -94,7 +94,7 @@
                     </div>
                     <div class="stat-card card">
                         <div class="stat-value">6,236</div>
-                        <div class="text-gray-600 dark:text-gray-400">Ayat</div>
+                        <div class="texta-gray-600 dark:text-gray-400">Ayat</div>
                     </div>
                     <div class="stat-card card">
                         <div class="stat-value" id="bookmarkStat">0</div>
