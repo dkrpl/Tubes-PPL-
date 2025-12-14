@@ -39,7 +39,7 @@
                 <a href="about.php" class="btn btn-outline">
                     <span class="hidden md:inline">About</span>
                 </a>
-                <a href="contact.php" class="btn btn-outline bg-purple-600/20 border-purple-600">
+                <a href="kontak.php" class="btn btn-outline bg-purple-600/20 border-purple-600">
                     <span class="hidden md:inline">Contact</span>
                 </a>
                 <a href="fitur.php" class="btn btn-outline">

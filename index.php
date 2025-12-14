@@ -31,7 +31,7 @@
                     <a href="about.php" class="btn btn-outline relative">
                         <span class="hidden md:inline">About</span>
                     </a>
-                    <a href="contact.php" class="btn btn-outline relative">
+                    <a href="kontak.php" class="btn btn-outline relative">
                         <span class="hidden md:inline">Contact</span>
                     </a>
                     <a href="fitur.php" class="btn btn-outline relative">
