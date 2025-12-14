@@ -215,22 +215,34 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <a href="index.html" class="btn btn-outline">
+                    <button onclick="showHome()" class="btn btn-outline">
                         <i class="fas fa-home"></i>
                         <span class="hidden md:inline">Beranda</span>
+                    </button>
+                    <a href="about.php" class="btn btn-outline relative">
+                        <span class="hidden md:inline">About</span>
                     </a>
-                    <a href="index.html#bookmarkPage" class="btn btn-outline relative">
+                    <a href="kontak.php" class="btn btn-outline relative">
+                        <span class="hidden md:inline">Contact</span>
+                    </a>
+                    <a href="fitur.php" class="btn btn-outline relative">
+                        <span class="hidden md:inline">Fitur</span>
+                    </a>
+                    <button onclick="showBookmarks()" class="btn btn-outline relative">
                         <i class="fas fa-bookmark"></i>
                         <span class="hidden md:inline">Bookmark</span>
                         <span id="bookmarkCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                    </a>
-                    <a href="about.php" class="btn btn-primary">
-                        <i class="fas fa-info-circle"></i>
+                    </button>
+                    <button onclick="showBookmarks()" class="btn btn-outline relative">
+                        <i class="fas fa-bookmark"></i>
                         <span class="hidden md:inline">About</span>
-                    </a>
+                        <span id="bookmarkCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        <a href="about.php"></a>
+                    </button>
                     <button onclick="toggleTheme()" class="btn btn-outline">
                         <i class="fas fa-moon"></i>
                     </button>
+                    
                 </div>
             </div>
         </div>
