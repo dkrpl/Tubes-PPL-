@@ -1,11 +1,13 @@
 {
+    "require": {
+        "php": ">=8.2"
+    },
     "require-dev": {
         "phpunit/phpunit": "^11.5"
     },
-     "scripts": {
+    "scripts": {
         "test": "phpunit tests/FileTypeTest.php --testdox --colors=always",
-        "test-ci": "phpunit tests/FileTypeTest.php --stop-on-failure",
-        "validate": "phpunit tests/FileTypeTest.php --testdox"
+        "test-ci": "phpunit tests/FileTypeTest.php --stop-on-failure"
     },
     "autoload": {
         "psr-4": {
