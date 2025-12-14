@@ -3,7 +3,7 @@
         "php": ">=8.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^11.5"
+        "phpunit/phpunit": "^9.0"
     },
     "scripts": {
         "test": "phpunit tests/FileTypeTest.php --testdox --colors=always",
